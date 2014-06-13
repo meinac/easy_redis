@@ -19,7 +19,7 @@ Or install it yourself as:
 
 ## Usage
 
-Create a file under initializers directory and set a redis client like above:
+Create a file under initializers directory and set a redis client like below:
     
     EasyRedis::Redis.configure(:redis => Redis.new)
 
