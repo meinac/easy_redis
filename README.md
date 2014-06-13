@@ -1,6 +1,7 @@
 # EasyRedis
 
-TODO: Write a gem description
+Helper methods for activerecord objects to use redis easily
+Don't worry about the type casting. EasyRedis does type conversions!
 
 ## Installation
 
@@ -18,7 +19,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a file under initializers directory and set a redis client like above:
+    
+    EasyRedis::Redis.configure(:redis => Redis.new)
+
+Examples:
+
+    u = User.find(1)
+    u.r_set("key", "value")
+    u.redis_set("key", "value")
+    u.redis_set_key("value")
+
+    u.r_get("key")
+    u.redis_get("key")
+    u.redis_get_key
+
+    u.r_del("key")
+    u.redis_del("key")
+    u.redis_del_key
+
+    u.r_update("key", "value")
+    u.redis_update("key", "value")
+    u.redis_update_key("value")
 
 ## Contributing
 
