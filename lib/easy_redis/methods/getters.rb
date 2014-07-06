@@ -4,7 +4,7 @@ module EasyRedis
 
     def r_get(attribute)
       val = self.redis_cli.hget(redis_key, attribute)
-      self.use_type_casting? ? YAML.load(val.to_s) : val
+      val.nil? ? nil : YAML.load(val.to_s)
     end
 
     def method_missing(meth, *args, &block)

@@ -1,6 +1,6 @@
 # EasyRedis
 
-Helper methods for activerecord objects to use redis easily
+Helper methods for activerecord objects to use redis easily.
 Don't worry about the type casting. EasyRedis does type conversions!
 
 ## Installation
@@ -21,26 +21,32 @@ Or install it yourself as:
 
 Create a file under initializers directory and set a redis client like below:
     
-    EasyRedis::Redis.configure(:redis => Redis.new)
+    EasyRedis::Redis.configure(redis: Redis.new)
+    
 
 Examples:
 
-    u = User.find(1)
-    u.r_set("key", "value")
-    u.redis_set("key", "value")
-    u.redis_set_key("value")
+    u = User.find(1) #sample ActiveRecord object
+    u.r_set("foo", "bar")
+    u.r_set_foo("bar")
+    u.redis_set("foo", "bar")
+    u.redis_set_foo("bar")
 
-    u.r_get("key")
-    u.redis_get("key")
-    u.redis_get_key
+    u.r_get("foo")
+    u.r_get_foo
+    u.redis_get("foo")
+    u.redis_get_foo
 
-    u.r_del("key")
-    u.redis_del("key")
-    u.redis_del_key
+    u.r_del("foo")
+    u.r_del_foo
+    u.redis_del("foo")
+    u.redis_del_foo
 
-    u.r_update("key", "value")
-    u.redis_update("key", "value")
-    u.redis_update_key("value")
+    u.r_set_foo true
+    u.r_get_foo #returns true
+
+    u.r_set_foo 1
+    u.r_get_foo #returns 1
 
 ## Contributing
 

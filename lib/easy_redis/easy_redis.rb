@@ -1,4 +1,5 @@
 require "easy_redis/version/version"
+require "easy_redis/errors/non_existent_object_error"
 require "easy_redis/initialize/active_record"
 
 module EasyRedis
@@ -8,7 +9,7 @@ module EasyRedis
     @@redis = nil
     @@config = {
       namespace: "easyredis",
-      type_cast: true,
+      raise_non_existent_object_error: true,
       redis: nil
     }
     @@valid_config_keys = @@config.keys
@@ -27,8 +28,8 @@ module EasyRedis
         @@config[:namespace]
       end
 
-      def use_type_casting?
-        @@config[:type_cast]
+      def raise_non_existent_object_error?
+        @@config[:raise_non_existent_object_error]
       end
 
       def configure(opts = {})
