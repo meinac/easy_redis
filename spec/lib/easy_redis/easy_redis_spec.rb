@@ -3,10 +3,7 @@ require 'spec_helper'
 describe EasyRedis::Redis do
 
   context 'redis method' do
-    it 'should return nil object if redis did not setted' do
-      expect(EasyRedis::Redis.redis).to eql(nil)
-    end
-    it 'should return nil object if redis did not setted' do
+    it 'should return redis object' do
       redis = Redis.new
       EasyRedis::Redis.configure(redis: redis)
       expect(EasyRedis::Redis.redis).to eql(redis)
