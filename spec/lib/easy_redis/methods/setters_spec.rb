@@ -51,4 +51,49 @@ describe EasyRedis::Setters do
     end
   end
 
+  context 'r_rset method' do
+    it 'should raise error for new records' do
+      allow(EasyRedis::Redis).to receive(:raise_non_existent_object_error?) { true }
+      u = User.new
+      expect{u.r_rset_foo "bar"}.to raise_error(NonExistentObjectError)
+    end
+    it 'should set value for given attribute and returns the given value' do
+      expect(@user.r_rset("foo", "bar")).to eql("bar")
+    end
+    it 'should update value for given attribute and returns the given value' do
+      @user.r_rset("foo", "bar")
+      expect(@user.r_rset("foo", "baz")).to eql("baz")
+    end
+  end
+
+  context 'redis_rset method' do
+    it 'should set value for given attribute and returns the given value' do
+      expect(@user.redis_rset("foo", "bar")).to eql("bar")
+    end
+    it 'should update value for given attribute and returns the given value' do
+      @user.redis_rset("foo", "bar")
+      expect(@user.redis_rset("foo", "baz")).to eql("baz")
+    end
+  end
+
+  context 'r_rset_attribute method' do
+    it 'should set value for given attribute and returns the given value' do
+      expect(@user.r_rset_boo("bar")).to eql("bar")
+    end
+    it 'should update value for given attribute and returns the given value' do
+      @user.r_rset_foo("bar")
+      expect(@user.r_rset_foo("baz")).to eql("baz")
+    end
+  end
+
+  context 'redis_rset_attribute method' do
+    it 'should set value for given attribute and returns the given value' do
+      expect(@user.redis_rset_boo("bar")).to eql("bar")
+    end
+    it 'should update value for given attribute and returns the given value' do
+      @user.redis_rset_foo("bar")
+      expect(@user.redis_rset_foo("baz")).to eql("baz")
+    end
+  end
+
 end
