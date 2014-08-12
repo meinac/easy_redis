@@ -48,6 +48,33 @@ Examples:
     u.r_set_foo 1
     u.r_get_foo #returns 1
 
+    # rset method:
+    #
+    # it sets the given value and returns the value
+    #
+    u.r_rset("foo", "bar") #=> "bar"
+    u.r_rset_foo("bar") #=> "bar"
+    u.redis_rset("foo", "bar") #=> "bar"
+    u.redis_rset_foo("bar") #=> "bar"
+
+    # fetch method:
+    # It runs like "Rails.cache.fetch" method in Rails
+    # 
+    # if "foo" key exists in redis with user object then return value
+    # otherwise call the given block
+    #
+    # Note: "fetch" method does not set (update) a value on a key if there exists a value.
+    #       You can update the value for the given key with ONLY "set", "rset" or "del" methods.
+    #
+    u.redis_fetch("foo") do
+      "bar"
+    end
+    u.r_fetch("foo") do
+      "bar"
+    end
+    u.redis_fetch("foo", "bar") #=> "bar"
+    u.r_fetch("foo", "bar") #=> "bar"
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/easy_redis/fork )
